@@ -1,32 +1,15 @@
-目录：
-
-/your-project-directory
-├── /backend
-│   ├── **app.py           # Flask 后端代码**
-│   ├── requirements.txt # 后端依赖列表
-├── /frontend
-│   ├── /src
-│   │   ├── **App.js       # React 前端代码**
-│   │   ├── **App.css      # 前端样式**
-│   │   └── index.js     # React 入口文件
-│   ├── package.json     # 前端依赖列表
-│   └── .env             # 前端环境配置
-└── README.md            # 项目说明文件
-
-加粗为要使用的主要代码。环境不一样配置的文件也不一样，可以按照两个目录创建文件目录，再把主要代码放进去。配置流程：
+# 1.创建项目
 
 1. pycharm创建flask项目
 2. 创建文件目录backend，frontend
-
 3. backend相关：
 
 安装flask和flask_cors
 
 ```
-
+pip install flask
+pip install Flask-CORS
 ```
-
-
 
 4. frontend相关：
 
@@ -52,13 +35,13 @@ npm install axios
 
 
 
-# 运行后端
+# 2.运行后端
 
 直接运行app.py
 
-#  运行前端
+#  3.运行前端
 
-命令行里面先
+命令行里面先进入前端文件目录：
 
 ```
 cd frontend
