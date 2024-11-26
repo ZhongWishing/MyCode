@@ -46,7 +46,7 @@ function App() {
       const timer = setTimeout(() => {
         setBoard(moves[0].split(""));
         setMoves((prevMoves) => prevMoves.slice(1));
-      }, 300); // 调整速度（毫秒）
+      }, 100); // 调整速度（毫秒）
       return () => clearTimeout(timer);
     }
     if (isRunning && moves.length === 0) {
@@ -92,8 +92,8 @@ function App() {
             <option value="BFS">BFS</option>
             <option value="DFS">DFS</option>
             <option value="Astar">A*</option>
-            <option value="Bibfs">双向BFS</option>
             <option value="Idastar">IDA*</option>
+            <option value="Bibfs">双向BFS</option>
           </select>
           <button onClick={handleStart} disabled={isRunning}>
             开始

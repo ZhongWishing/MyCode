@@ -66,7 +66,7 @@ def solve_bfs(start_state):
     return [], 0, nodes_explored
 
 # DFS 求解逻辑
-def solve_dfs(start_state, max_depth=100):
+def solve_dfs(start_state, max_depth=200):
     visited = set()
     stack = [(start_state, [])]
     nodes_explored = 0
@@ -93,7 +93,6 @@ def solve_dfs(start_state, max_depth=100):
 
     elapsed_time = round((time.time() - start_time) * 1000, 3)
     return [], elapsed_time, nodes_explored, reached_limit
-
 
 # A* 求解逻辑
 def solve_astar(start_state):
@@ -212,7 +211,6 @@ def solve_bibfs(start_state):
 
     return [], 0, nodes_explored  # 无解
 
-
 # IDA*求解逻辑
 def solve_idastar(start_state):
     def heuristic(state):
@@ -296,7 +294,7 @@ def solve_bfs_interface():
 @app.route('/solve_dfs', methods=['POST'])
 def solve_dfs_interface():
     start_state = request.json.get('start', generate_random_state())
-    max_depth = request.json.get('max_depth', 100)  # 动态指定最大深度
+    max_depth = request.json.get('max_depth', 200)  # 动态指定最大深度
     if not is_solvable(start_state):
         return jsonify({"error": "该状态无解！"}), 400
 
@@ -329,20 +327,6 @@ def solve_astar_interface():
         "nodes_explored": nodes_explored
     })
 
-# 双向BFS接口
-@app.route('/solve_bibfs', methods=['POST'])
-def solve_bibfs_interface():
-    start_state = request.json.get('start', generate_random_state())
-    if not is_solvable(start_state):
-        return jsonify({"error": "该状态无解！"}), 400
-    path, elapsed_time, nodes_explored = solve_bibfs(start_state)
-    return jsonify({
-        "moves": path,
-        "time": elapsed_time,
-        "path_length": len(path),
-        "nodes_explored": nodes_explored
-    })
-
 # IDA*接口
 @app.route('/solve_idastar', methods=['POST'])
 def solve_idastar_interface():
@@ -350,6 +334,21 @@ def solve_idastar_interface():
     if not is_solvable(start_state):
         return jsonify({"error": "该状态无解！"}), 400
     path, elapsed_time, nodes_explored = solve_idastar(start_state)
+    return jsonify({
+        "moves": path,
+        "time": elapsed_time,
+        "path_length": len(path),
+        "nodes_explored": nodes_explored
+    })
+
+
+# 双向BFS接口
+@app.route('/solve_bibfs', methods=['POST'])
+def solve_bibfs_interface():
+    start_state = request.json.get('start', generate_random_state())
+    if not is_solvable(start_state):
+        return jsonify({"error": "该状态无解！"}), 400
+    path, elapsed_time, nodes_explored = solve_bibfs(start_state)
     return jsonify({
         "moves": path,
         "time": elapsed_time,
